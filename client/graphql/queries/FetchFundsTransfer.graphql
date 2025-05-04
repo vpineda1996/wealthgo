@@ -1,0 +1,93 @@
+query FetchFundsTransfer($id: ID!) {
+  fundsTransfer: funds_transfer(id: $id, include_cancelled: true) {
+    ...FundsTransfer
+    __typename
+  }
+}
+
+fragment FundsTransfer on FundsTransfer {
+  id
+  status
+  cancellable
+  rejectReason: reject_reason
+  schedule {
+    id
+    __typename
+  }
+  source {
+    ...BankAccountOwner
+    __typename
+  }
+  destination {
+    ...BankAccountOwner
+    __typename
+  }
+  __typename
+}
+
+fragment BankAccountOwner on BankAccountOwner {
+  bankAccount: bank_account {
+    ...BankAccount
+    __typename
+  }
+  __typename
+}
+
+fragment BankAccount on BankAccount {
+  id
+  accountName: account_name
+  corporate
+  createdAt: created_at
+  currency
+  institutionName: institution_name
+  jurisdiction
+  nickname
+  type
+  updatedAt: updated_at
+  verificationDocuments: verification_documents {
+    ...BankVerificationDocument
+    __typename
+  }
+  verifications {
+    ...BankAccountVerification
+    __typename
+  }
+  ...CaBankAccount
+  ...UsBankAccount
+  __typename
+}
+
+fragment CaBankAccount on CaBankAccount {
+  accountName: account_name
+  accountNumber: account_number
+  __typename
+}
+
+fragment UsBankAccount on UsBankAccount {
+  accountName: account_name
+  accountNumber: account_number
+  __typename
+}
+
+fragment BankVerificationDocument on VerificationDocument {
+  id
+  acceptable
+  updatedAt: updated_at
+  createdAt: created_at
+  documentId: document_id
+  documentType: document_type
+  rejectReason: reject_reason
+  reviewedAt: reviewed_at
+  reviewedBy: reviewed_by
+  __typename
+}
+
+fragment BankAccountVerification on BankAccountVerification {
+  custodianProcessedAt: custodian_processed_at
+  custodianStatus: custodian_status
+  document {
+    ...BankVerificationDocument
+    __typename
+  }
+  __typename
+}

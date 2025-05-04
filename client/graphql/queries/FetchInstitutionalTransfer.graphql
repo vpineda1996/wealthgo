@@ -1,0 +1,61 @@
+query FetchInstitutionalTransfer($id: ID!) {
+  accountTransfer(id: $id) {
+    ...InstitutionalTransfer
+    __typename
+  }
+}
+
+fragment InstitutionalTransfer on InstitutionalTransfer {
+  id
+  accountId: account_id
+  state
+  documentId: document_id
+  documentType: document_type
+  expectedCompletionDate: expected_completion_date
+  timelineExpectation: timeline_expectation {
+    lowerBound: lower_bound
+    upperBound: upper_bound
+    __typename
+  }
+  estimatedCompletionMaximum: estimated_completion_maximum
+  estimatedCompletionMinimum: estimated_completion_minimum
+  institutionName: institution_name
+  transferStatus: external_state
+  redactedInstitutionAccountNumber: redacted_institution_account_number
+  expectedValue: expected_value
+  transferType: transfer_type
+  cancellable
+  pdfUrl: pdf_url
+  clientVisibleState: client_visible_state
+  shortStatusDescription: short_status_description
+  longStatusDescription: long_status_description
+  progressPercentage: progress_percentage
+  type
+  rolloverType: rollover_type
+  autoSignatureEligible: auto_signature_eligible
+  parentInstitution: parent_institution {
+    id
+    name
+    __typename
+  }
+  stateHistories: state_histories {
+    id
+    state
+    notes
+    transitionSubmittedBy: transition_submitted_by
+    transitionedAt: transitioned_at
+    transitionCode: transition_code
+    __typename
+  }
+  transferFeeReimbursement: transfer_fee_reimbursement {
+    id
+    feeAmount: fee_amount
+    __typename
+  }
+  docusignSentViaEmail: docusign_sent_via_email
+  clientAccountType: client_account_type
+  primaryClientIdentityId: primary_client_identity_id
+  primaryOwnerSigned: primary_owner_signed
+  secondaryOwnerSigned: secondary_owner_signed
+  __typename
+}

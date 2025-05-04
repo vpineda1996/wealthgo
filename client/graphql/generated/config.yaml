@@ -1,0 +1,21 @@
+schema:
+    - ./../schema/account.graphql
+    - ./../schema/securities.graphql
+    - ./../schema/activities.graphql
+    - ./../schema/transfer.graphql
+generates:
+    accounts.generated.go:
+      config:
+        packageName: generated
+        entities:
+          - Account
+    securities.generated.go:
+      config:
+        packageName: generated
+        entities:
+          - Security
+    activities.generated.go:
+      config:
+        packageName: generated
+        entities:
+          - ActivityFeedItem

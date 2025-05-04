@@ -1,0 +1,46 @@
+
+type ActivityFeedItem {
+  accountId: ID
+  aftOriginatorName: String
+  aftTransactionCategory: String
+  aftTransactionType: String
+  amount: String!
+  amountSign: String
+  assetQuantity: String!
+  assetSymbol: String
+  canonicalId: ID
+  currency: String
+  eTransferEmail: String
+  eTransferName: String
+  externalCanonicalId: ID
+  identityId: ID
+  institutionName: String
+  occurredAt: String # Could be DateTime if the actual type is known
+  p2pHandle: String
+  p2pMessage: String
+  spendMerchant: String
+  securityId: ID
+  billPayCompanyName: String
+  billPayPayeeNickname: String
+  redactedExternalAccountNumber: String
+  opposingAccountId: ID
+  status: String!
+  subType: String!
+  type: String!
+  strikePrice: String!
+  contractType: String
+  expiryDate: String # Could be Date if the actual type is known
+  chequeNumber: String
+  provisionalCreditAmount: String!
+  primaryBlocker: String
+  interestRate: String!
+  frequency: String
+  counterAssetSymbol: String
+  rewardProgram: String
+  counterPartyCurrency: String
+  counterPartyCurrencyAmount: String!
+  counterPartyName: String
+  fxRate: String!
+  fees: String!
+  reference: String
+}

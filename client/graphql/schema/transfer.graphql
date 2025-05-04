@@ -1,0 +1,140 @@
+interface BankAccountOwner {
+  bank_account: BankAccount
+}
+
+type FundsTransfer {
+  id: ID!
+  status: String!
+  cancellable: Boolean!
+  reject_reason: String
+  schedule: Schedule
+  source: BankAccountOwner
+  destination: BankAccountOwner
+}
+
+type Schedule {
+  id: ID!
+}
+
+interface BankAccount {
+  id: ID!
+  account_name: String!
+  corporate: Boolean!
+  created_at: String!
+  currency: String!
+  institution_name: String!
+  jurisdiction: String!
+  nickname: String
+  type: String!
+  updated_at: String!
+  verification_documents: [VerificationDocument!]
+  verifications: [BankAccountVerification!]
+}
+
+type CaBankAccount implements BankAccount {
+  id: ID!
+  account_name: String!
+  account_number: String!
+  corporate: Boolean!
+  created_at: String!
+  currency: String!
+  institution_name: String!
+  jurisdiction: String!
+  nickname: String
+  type: String!
+  updated_at: String!
+  verification_documents: [VerificationDocument!]
+  verifications: [BankAccountVerification!]
+}
+
+type UsBankAccount implements BankAccount {
+  id: ID!
+  account_name: String!
+  account_number: String!
+  corporate: Boolean!
+  created_at: String!
+  currency: String!
+  institution_name: String!
+  jurisdiction: String!
+  nickname: String
+  type: String!
+  updated_at: String!
+  verification_documents: [VerificationDocument!]
+  verifications: [BankAccountVerification!]
+}
+
+type VerificationDocument {
+  id: ID!
+  acceptable: Boolean!
+  updated_at: String!
+  created_at: String!
+  document_id: String!
+  document_type: String!
+  reject_reason: String
+  reviewed_at: String
+  reviewed_by: String
+}
+
+type BankAccountVerification {
+  custodian_processed_at: String
+  custodian_status: String
+  document: VerificationDocument
+}
+
+type InstitutionalTransfer {
+  id: ID!
+  account_id: ID!
+  state: String!
+  document_id: String
+  document_type: String
+  expected_completion_date: String
+  timeline_expectation: TimelineExpectation
+  estimated_completion_maximum: String
+  estimated_completion_minimum: String
+  institution_name: String!
+  external_state: String
+  redacted_institution_account_number: String
+  expected_value: Float
+  transfer_type: String!
+  cancellable: Boolean!
+  pdf_url: String
+  client_visible_state: String
+  short_status_description: String
+  long_status_description: String
+  progress_percentage: Float
+  type: String!
+  rollover_type: String
+  auto_signature_eligible: Boolean
+  parent_institution: ParentInstitution
+  state_histories: [StateHistory!]
+  transfer_fee_reimbursement: TransferFeeReimbursement
+  docusign_sent_via_email: Boolean
+  client_account_type: String
+  primary_client_identity_id: ID
+  primary_owner_signed: Boolean
+  secondary_owner_signed: Boolean
+}
+
+type TimelineExpectation {
+  lower_bound: String!
+  upper_bound: String!
+}
+
+type ParentInstitution {
+  id: ID!
+  name: String!
+}
+
+type StateHistory {
+  id: ID!
+  state: String!
+  notes: String
+  transition_submitted_by: String
+  transitioned_at: String!
+  transition_code: String
+}
+
+type TransferFeeReimbursement {
+  id: ID!
+  fee_amount: Float!
+}
