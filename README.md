@@ -170,6 +170,21 @@ if err != nil {
 
 See the [example/main.go](example/main.go) file for a complete example of how to use the library.
 
+## Development
+
+### Continuous Integration
+
+This project uses GitHub Actions for continuous integration and deployment:
+
+- Every push to main/master branches triggers a build and test workflow
+- Commits with "new release" in the message will automatically create a new GitHub release
+- To create a new version release, include the version in your commit message like: "new release v1.2.3"
+
+The CI pipeline:
+1. Builds the library to ensure it compiles correctly
+2. Runs tests to verify functionality
+3. Creates a GitHub release when triggered by the appropriate commit message
+
 ## Disclaimer
 
 This is an unofficial client library and is not affiliated with, maintained, authorized, endorsed, or sponsored by Wealthsimple.
